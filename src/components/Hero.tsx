@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Code2, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Hero = () => (
   <motion.section
@@ -47,16 +48,18 @@ const Hero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
       >
-        <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
-          Get Started
-          <motion.span
-            className="ml-2 inline-block"
-            animate={{ x: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-          >
-            <ArrowRight className="w-4 h-4" />
-          </motion.span>
-        </Button>
+        <Link href="/login">
+          <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
+            Get Started
+            <motion.span
+              className="ml-2 inline-block"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+            >
+              <ArrowRight className="w-4 h-4" />
+            </motion.span>
+          </Button>
+        </Link>
         <Button className="text-black font-bold hover:text-purple-700" size="lg" variant="outline">
           View Demo
         </Button>

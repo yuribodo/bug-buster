@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Link from 'next/link';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,9 +45,11 @@ const Header = () => {
               </button>
             ))}
           </nav>
-          <Button className="bg-purple-600 hover:bg-purple-700">
-            Get Started
-          </Button>
+          <Link href="/login">
+            <Button className="bg-purple-600 hover:bg-purple-700">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
     </motion.header>
