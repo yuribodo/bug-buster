@@ -1,11 +1,22 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { SendHorizonal } from 'lucide-react';
 
 const ChatInput = () => {
+  const [windowWidth, setWindowWidth] = useState(0);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [prompt, setPrompt] = useState('');
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
+  const windowWidthHandler = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth;
+    }
+  };
 
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
@@ -21,12 +32,6 @@ const ChatInput = () => {
     e.preventDefault();
     setPrompt('');
   };
-  const windowWidthHandler = () => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth;
-    }
-  };
-  const windowWidth = windowWidthHandler();
 
   return (
     <label className="bg-zinc-800 flex flex-row self-end w-4/5 md:w-2/5 m-2 rounded-lg p-3">
