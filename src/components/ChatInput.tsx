@@ -12,12 +12,6 @@ const ChatInput = () => {
     setWindowWidth(window.innerWidth);
   }, []);
 
-  const windowWidthHandler = () => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth;
-    }
-  };
-
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
 
