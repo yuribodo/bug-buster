@@ -1,14 +1,44 @@
-import { Textarea } from "@/components/ui/textarea";
-import { SendHorizontal } from "lucide-react";
+'use client';
+import { useState, useRef } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { SendHorizonal } from 'lucide-react';
 
 const ChatInput = () => {
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [prompt, setPrompt] = useState('');
+  const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setPrompt(e.target.value);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      const newHeight = Math.min(textareaRef.current.scrollHeight, 200);
+      textareaRef.current.style.height = `${newHeight}px`;
+    }
+  };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPrompt('');
+    console.log(prompt);
+  };
+  console.log('prompt:', prompt);
   return (
-    <div className="flex  h-24 w-[90%] md:w-2/5 md:h-28 md:max-h-44  bg-slate-800 justify-center items-start absolute bottom-6 rounded-2xl p-4 overflow-auto">
-      <Textarea placeholder="Type here" />
-      <div className="flex flex-col justify-center h-full hover:scale-125 transition-transform ">
-        <SendHorizontal size={32} />
-      </div>
-    </div>
+    <label className="bg-zinc-800 flex flex-row self-end w-4/5 md:w-2/5 m-2 rounded-lg p-3">
+      <form onSubmit={(e) => handleSubmit(e)} className="p-2 flex w-full">
+        <textarea
+          ref={textareaRef}
+          placeholder="Type here..."
+          className=" bg-zinc-800 overflow-y-auto resize-none rounded-lg p-2 outline-none w-full"
+          value={prompt}
+          onChange={(e) => handleInput(e)}
+        />
+        <button
+          type="submit"
+          className={` ${prompt ? 'hover:scale-110' : ''} disabled:opacity-30 justify-end`}
+          disabled={!prompt}
+        >
+          <SendHorizonal size={window.innerWidth > 1000 ? 32 : 25} />
+        </button>
+      </form>
+    </label>
   );
 };
 
