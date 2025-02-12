@@ -35,7 +35,7 @@ const ChatInput = () => {
   };
 
   return (
-    <label className="bg-zinc-800 flex flex-row self-end w-4/5 md:w-2/5 m-2 rounded-lg p-3">
+    <label className="bg-zinc-800 flex flex-row self-center w-4/5 md:w-2/5 m-2 rounded-lg p-3">
       <form onSubmit={(e) => handleSubmit(e)} className="p-2 flex w-full">
         <textarea
           ref={textareaRef}
