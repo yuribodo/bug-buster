@@ -22,6 +22,15 @@ const ChatInput = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (prompt !== '') {
+        handleSubmit(e as unknown as FormEvent<HTMLFormElement>);
+      }
+    }
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPrompt('');
@@ -36,6 +45,7 @@ const ChatInput = () => {
           className=" bg-zinc-800 overflow-y-auto resize-none rounded-lg p-2 outline-none w-full"
           value={prompt}
           onChange={(e) => handleInput(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         <button
           type="submit"
