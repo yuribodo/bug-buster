@@ -1,16 +1,14 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import useWindowWidth from '@/hooks/useWindowWidth';
 import type { ChangeEvent, FormEvent } from 'react';
 import { SendHorizonal } from 'lucide-react';
 
 const ChatInput = () => {
-  const [windowWidth, setWindowWidth] = useState(0);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [prompt, setPrompt] = useState('');
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindowWidth();
 
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
