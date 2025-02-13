@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import useWindowWidth from '@/hooks/useWindowWidth';
 import type { ChangeEvent, FormEvent } from 'react';
 import { SendHorizonal } from 'lucide-react';
+import { easeIn, motion } from 'framer-motion';
 
 const ChatInput = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -35,7 +36,12 @@ const ChatInput = () => {
   };
 
   return (
-    <label className="bg-zinc-800 flex flex-row self-center w-4/5 md:w-2/5 m-2 rounded-lg p-3">
+    <motion.label
+      className="bg-zinc-800 flex flex-row self-center w-4/5 md:w-2/5 m-2 rounded-lg p-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+    >
       <form onSubmit={(e) => handleSubmit(e)} className="p-2 flex w-full">
         <textarea
           ref={textareaRef}
@@ -53,7 +59,7 @@ const ChatInput = () => {
           <SendHorizonal size={windowWidth! > 1000 ? 32 : 25} />
         </button>
       </form>
-    </label>
+    </motion.label>
   );
 };
 
